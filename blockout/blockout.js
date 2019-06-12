@@ -1,4 +1,6 @@
 var canvas = document.getElementById("myCanvas");
+var start = document.getElementById("startbutton");
+var div = document.getElementById("div_button");
 var ctx = canvas.getContext("2d");
 var x = canvas.width/2;
 var y = canvas.height-30;
@@ -153,4 +155,9 @@ function draw() {
     y += dy;
     requestAnimationFrame(draw);
 }
-draw();
+start.onclick = () => {
+    draw();
+    div.removeChild(start);
+}
+drawPaddle();
+drawBricks();
