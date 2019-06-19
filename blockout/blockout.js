@@ -1,5 +1,9 @@
-var canvas = document.getElementById("myCanvas");
-var start = document.getElementById("startbutton");
+var parent = document.getElementById("parent");
+var canvas = document.createElement("canvas");
+canvas.width = 480;
+canvas.height = 320;
+document.getElementById("mycanvas").appendChild(canvas);
+var startButton = document.getElementById("startbutton");
 var div = document.getElementById("div_button");
 var ctx = canvas.getContext("2d");
 var x = canvas.width/2;
@@ -48,7 +52,7 @@ function keyUpHandler(e) {
     }
 }
 function mouseMoveHandler(e) {
-    var relativeX = e.clientX - canvas.offsetLeft;
+    var relativeX = e.clientX - parent.offsetLeft;
     if(relativeX > 0 && relativeX < canvas.width) {
         paddleX = relativeX - paddleWidth/2;
     }
@@ -63,8 +67,7 @@ function collisionDetection() {
                     b.status = 0;
                     score++;
                     if(score == brickRowCount*brickColumnCount) {
-                        alert("YOU WIN, CONGRATULATIONS!");
-                        document.location.reload();
+                        stop()
                     }
                 }
             }
@@ -133,8 +136,7 @@ function draw() {
         else {
           lives--;
           if(!lives) {
-            alert("GAME OVER");
-            document.location.reload();
+            stop()
           }
           else {
             x = canvas.width/2;
@@ -153,11 +155,55 @@ function draw() {
     }
     x += dx;
     y += dy;
-    requestAnimationFrame(draw);
 }
-start.onclick = () => {
-    draw();
-    div.removeChild(start);
+function stop() {
+    document.getElementById("myfilter").style.display = "block";
+    document.getElementById("myscore").style.display = "block";
+    document.getElementById("div_button").style.display = "block";
+    var text = document.createElement("p");
+    text.innerText = "Score: " + score;
+    text.style.color = "black";
+    text.style.fontSize = 48;
+    document.getElementById("myscore").appendChild(text);
+    clearInterval(interval);
 }
+startButton.onclick = () => {
+    while (document.getElementById("myscore").firstChild) { 
+        document.getElementById("myscore").removeChild(document.getElementById("myscore").firstChild);
+    }
+    document.getElementById("myfilter").style.display = "None";
+    document.getElementById("myscore").style.display = "None";
+    document.getElementById("div_button").style.display = "None";
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    x = canvas.width/2;
+    y = canvas.height-30;
+    dx = 2;
+    dy = -2;
+    ballRadius = 10;
+    paddleHeight = 10;
+    paddleWidth = 75;
+    paddleX = (canvas.width-paddleWidth)/2;
+    rightPressed = false;
+    leftPressed = false;
+    brickRowCount = 3;
+    brickColumnCount = 5;
+    brickWidth = 75;
+    brickHeight = 20;
+    brickPadding = 10;
+    brickOffsetTop = 30;
+    brickOffsetLeft = 30;
+    score = 0;
+    lives = 3;
+    bricks = [];
+    for(var c=0; c<brickColumnCount; c++) {
+        bricks[c] = [];
+        for(var r=0; r<brickRowCount; r++) {
+            bricks[c][r] = { x: 0, y: 0, status: 1 };
+        }
+    }
+    interval = setInterval(draw, 10);
+}
+
+drawBall();
 drawPaddle();
 drawBricks();
