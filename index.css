@@ -1,0 +1,17 @@
+.nav {
+    display: table;
+    width: 100%;
+    background: #FFF;
+}
+.item {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+.item a {
+    display: block;
+    padding: 15px 0;
+    color: #666;
+    text-decoration: none;
+    font-size: 14px;
+}
