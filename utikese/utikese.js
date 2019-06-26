@@ -1,4 +1,3 @@
-"定数の設定"
 var parent = document.getElementById("parent");
 var canvas = document.createElement("canvas");
 canvas.width = 480;
@@ -34,7 +33,6 @@ for(var c=0; c<ballnumber; c++){
     }
 }
 
-"paddleを動かせるようにする。"
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 document.addEventListener("mousemove", mouseMoveHandler, false);
@@ -61,7 +59,6 @@ function mouseMoveHandler(e) {
     }
 }
 
-"ballの表示"
 function drawBall() {
     for(c=0; c<ballnumber; c++){
         if(balls[c].status >= 1){
@@ -76,7 +73,6 @@ function drawBall() {
     }
 }
 
-"paddleの表示"
 function drawPaddle() {
     ctx.beginPath();
     ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
@@ -93,8 +89,7 @@ function drawScore() {
     ctx.fillText("Score1: "+ score1 + "  Score2: " + score2, 8, 20);
 }
 
-"clere処理"
-function stopclere(){
+function stopclear(){
     document.getElementById("myfilter").style.display = "block";
     document.getElementById("myscore").style.display = "block";
     document.getElementById("div_button").style.display = "block";
@@ -106,7 +101,6 @@ function stopclere(){
     clearInterval(interval);
 }
 
-"gameovere処理"
 function stopgameover() {
     document.getElementById("myfilter").style.display = "block";
     document.getElementById("myscore").style.display = "block";
@@ -122,15 +116,11 @@ function stopgameover() {
     }
 }
 
-"全ての細かい設定"
 function draw() {
-    "画面のreset"
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    "関数の呼び出し"
     drawScore();
     drawBall();
     drawPaddle();
-    "壁、paddleにぶつかったとき"
     for(c=0; c<ballnumber; c++){
         if(x[c] + dx[c] > canvas.width-ballRadius || x[c] + dx[c] < ballRadius){
             dx[c] = -dx[c];
@@ -144,7 +134,7 @@ function draw() {
                     dy[c] = 0;
                     end++;
                     if(end == ballnumber){
-                        stopclere();
+                        stopclear();
                     }
                 }
                 else{
@@ -160,7 +150,6 @@ function draw() {
         }
     }
 
-    "ボタン押したときの処理"
     if(rightPressed && paddleX < canvas.width-paddleWidth) {
         paddleX += 7;
     }
@@ -168,12 +157,10 @@ function draw() {
         paddleX -= 7;
     }
 
-    "場所変化"
     for(c=0; c<ballnumber; c++){
         x[c] += dx[c];
         y[c] += dy[c];
     }
-    "requestAnimationFrame(draw);"
 }
 
 startButton.onclick = () => {

@@ -10,7 +10,7 @@ var x = canvas.width/2;
 var y = canvas.height-30;
 var radius = 10;
 
-var level = 1;
+var level = 0;
 
 var obst = new Array();
 obst.push({x: canvas.width/2, y: canvas.height-60, dx: 1, dy: 1});
@@ -38,6 +38,12 @@ function drawBall() {
     ctx.fillStyle = "#0095DD";
     ctx.fill();
     ctx.closePath();
+}
+
+function drawScore() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "brown";
+    ctx.fillText("Score: "+ level, 8, 20);
 }
 
 function drawObstacles() {
@@ -94,6 +100,7 @@ function stop() {
 function draw() {
     count++;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawScore();
     drawBall();
     drawObstacles();
     updateObstacles();
@@ -101,7 +108,7 @@ function draw() {
     if (count > 200) {
         count = 0;
         obst.push({x: Math.random() * (canvas.width - 0), y: Math.random() * (canvas.height - 0), dx: Math.random() * (1.5 - 0.5) + 0.5, dy: Math.random() * (1.5 - 0.5) + 0.5});
-        level++;
+        level = obst.length;
     }
 }
 
@@ -113,7 +120,7 @@ startButton.onclick = () => {
     document.getElementById("myscore").style.display = "None";
     document.getElementById("div_button").style.display = "None";
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    level = 1;
+    level = obst.length;
     obst = new Array();
     obst.push({x: canvas.width/2, y: canvas.height-60, dx: 1, dy: 1});
     obstsize = 20;
@@ -123,3 +130,4 @@ startButton.onclick = () => {
 }
 
 drawBall();
+drawScore();
