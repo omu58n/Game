@@ -13,5 +13,17 @@
     padding: 15px 0;
     color: #666;
     text-decoration: none;
-    font-size: 14px;
+}
+
+.name {
+    font-size: 28px;
+    position: relative;
+    padding: 0.35em 0.5em;
+    background: #b6e9ff;
+    color: #393939;
+    width: 80%;
+}
+.description {
+    font-size: 18px;
+    width: 90%;
 }

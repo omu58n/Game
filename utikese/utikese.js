@@ -85,6 +85,15 @@ function drawPaddle() {
     ctx.closePath();
 }
 
+function drawScore() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "brown";
+    console.log(balls[0].status);
+    score1 = 5 - balls[0].status;
+    score2 = 5 - balls[1].status;
+    ctx.fillText("Score1: "+ score1 + "  Score2: " + score2, 8, 20);
+}
+
 "clere処理"
 function stopclere(){
     document.getElementById("myfilter").style.display = "block";
@@ -119,6 +128,7 @@ function draw() {
     "画面のreset"
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     "関数の呼び出し"
+    drawScore();
     drawBall();
     drawPaddle();
     "壁、paddleにぶつかったとき"
@@ -204,4 +214,5 @@ startButton.onclick = () => {
     interval = setInterval(draw, 10);
 }
 drawPaddle();
+drawScore();
 drawBall();

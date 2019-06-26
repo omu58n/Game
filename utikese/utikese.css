@@ -27,6 +27,18 @@
     height: 60px;
     display: none;
 }
+.name {
+    text-align: center;
+    font-size: 28px;
+    position: relative;
+    padding: 0.35em 0.5em;
+    background: #b6e9ff;
+    color: #393939;
+}
+.description {
+    font-size: 18px;
+    padding: 15px 0;
+}
 div { 
     text-align : center ;
 }
