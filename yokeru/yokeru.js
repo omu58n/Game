@@ -100,6 +100,7 @@ function stop() {
 function draw() {
     count++;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    level = obst.length;
     drawScore();
     drawBall();
     drawObstacles();
@@ -108,7 +109,6 @@ function draw() {
     if (count > 200) {
         count = 0;
         obst.push({x: Math.random() * (canvas.width - 0), y: Math.random() * (canvas.height - 0), dx: Math.random() * (1.5 - 0.5) + 0.5, dy: Math.random() * (1.5 - 0.5) + 0.5});
-        level = obst.length;
     }
 }
 
