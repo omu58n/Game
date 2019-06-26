@@ -120,11 +120,11 @@ startButton.onclick = () => {
     document.getElementById("myscore").style.display = "None";
     document.getElementById("div_button").style.display = "None";
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    level = obst.length;
     obst = new Array();
     obst.push({x: canvas.width/2, y: canvas.height-60, dx: 1, dy: 1});
     obstsize = 20;
     count = 0;
+    level = obst.length;
     draw();
     interval = setInterval(draw, 10);
 }
