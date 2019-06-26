@@ -88,7 +88,6 @@ function drawPaddle() {
 function drawScore() {
     ctx.font = "16px Arial";
     ctx.fillStyle = "brown";
-    console.log(balls[0].status);
     score1 = 5 - balls[0].status;
     score2 = 5 - balls[1].status;
     ctx.fillText("Score1: "+ score1 + "  Score2: " + score2, 8, 20);
